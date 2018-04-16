@@ -1,5 +1,5 @@
-let playerPosition = "25.43 18 45.96";
-const playerRotation = "-26.81 27.61 0";
+let playerPosition = "-38.557591268482845 22.549 -54.14166883438441";
+const playerRotation = "-66.05036416353157 -129.48846169956641 0";
 const map = {
   "data": [
     'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W',
@@ -45,6 +45,7 @@ const WALL_HEIGHT_SMALL = 1.5;
 const WALL_DEPTH = 2;
 const scene = document.querySelector('a-scene');
 let walls;
+let fornitures;
 
 if (scene.hasLoaded) {
   createScene();
@@ -67,6 +68,11 @@ function createScene() {
 
 function getPosition(x, y, z) {
   return `${((x - (map.yAxis / 2)) * WALL_WIDTH)} ${z} ${(y - (map.xAxis / 2)) * WALL_WIDTH}`;
+}
+
+function modifyPosition(positions, deltaX, deltaY, deltaZ) {
+  let pos = positions.split(' ');
+  return `${parseFloat(pos[0], 10) + deltaX} ${parseFloat(pos[1], 10) + deltaZ} ${parseFloat(pos[2], 10) + deltaY}`;
 }
 
 function createObject(type, x, y) {
@@ -104,12 +110,7 @@ function createObject(type, x, y) {
     // desk
     case 'D': {
       createDesk({
-        height: WALL_HEIGHT,
-        width: WALL_WIDTH,
-        depth: WALL_DEPTH,
-        color: '#fff',
         position: getPosition(x, y, 1.5),
-        material: 'opacity: 0.8;src: #Wall-transparent; repeat: 4 4',
       })
       break;
     }   
@@ -135,12 +136,32 @@ function createWall(config) {
   wall.setAttribute('static-body', 'sphereRadius:NaN');
 }
 
-function createDesk(config) {
-  let desk = document.createElement('a-entity');
-  scene.appendChild(desk);
+function addForniture(config) {
   let table = document.createElement('a-entity');
-  table.setAttribute('io3d-furniture', 'id:961d4bae-6e62-4007-b50f-8c656fecce14');
+  table.setAttribute('io3d-furniture', config.furnitureId);
   table.setAttribute('position', config.position);
-  table.setAttribute('scale', '1.5 1 2');
-  desk.appendChild(table);
+  table.setAttribute('scale', config.scale);
+  table.setAttribute('rotation', config.rotation);
+  fornitures.appendChild(table);
+}
+
+function createDesk(config) {
+  if (!fornitures) {
+    fornitures = document.createElement('a-entity');
+    fornitures.setAttribute('id','#furnitures');
+    scene.appendChild(fornitures);
+  }
+  //table
+  addForniture({
+    position: modifyPosition(config.position, 4, 0, 0),
+    furnitureId: 'id:961d4bae-6e62-4007-b50f-8c656fecce14',
+    scale: '1.5 1 2',
+    rotation: '0 0 0',
+  });
+  addForniture({
+    position: modifyPosition(config.position, 0, 2, 0),
+    furnitureId: 'id:c37f95ef-9d35-40ca-b72b-2fe7d1e4bc4b',
+    scale: '1 1.5 1',
+    rotation: '0 -180 0',
+  }); 
 }

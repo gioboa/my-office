@@ -158,10 +158,18 @@ function createDesk(config) {
     scale: '1.5 1 2',
     rotation: '0 0 0',
   });
+  //chair 1
   addForniture({
     position: modifyPosition(config.position, 0, 2, 0),
     furnitureId: 'id:c37f95ef-9d35-40ca-b72b-2fe7d1e4bc4b',
     scale: '1 1.5 1',
     rotation: '0 -180 0',
-  }); 
+  });
+  //chair 2
+  addForniture({
+    position: modifyPosition(config.position, 2, 2, 0),
+    furnitureId: 'id:c37f95ef-9d35-40ca-b72b-2fe7d1e4bc4b',
+    scale: '1 1.5 1',
+    rotation: '0 -180 0',
+  });
 }

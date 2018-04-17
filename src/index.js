@@ -1,8 +1,8 @@
 import {createDesk, createWall} from './generator';
 import {modifyPosition, getPosition, map, WALL_WIDTH, WALL_DEPTH, WALL_HEIGHT, WALL_HEIGHT_SMALL} from './utils';
 
-const playerPosition = "-38.557591268482845 22.549 -54.14166883438441";
-const playerRotation = "-66.05036416353157 -129.48846169956641 0";
+const playerPosition = "53.00621467111909 15 17.902337637901088";
+const playerRotation = "-26.012283898939394 51.5662015617741 0";
 const scene = document.querySelector('a-scene');
 
 function createScene() {

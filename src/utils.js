@@ -1,4 +1,18 @@
-window.officeMap = {
+export const WALL_WIDTH = 2;
+export const WALL_HEIGHT = 3;
+export const WALL_HEIGHT_SMALL = 1.5;
+export const WALL_DEPTH = 2;
+
+export const modifyPosition = (positions, deltaX, deltaY, deltaZ) => {
+  let pos = positions.split(' ');
+  return `${parseFloat(pos[0], 10) + deltaX} ${parseFloat(pos[1], 10) + deltaZ} ${parseFloat(pos[2], 10) + deltaY}`;
+}
+
+export const getPosition = (x, y, z) => {
+  return `${((x - (map.xAxis / 2)) * WALL_WIDTH)} ${z} ${(y - (map.yAxis / 2)) * WALL_WIDTH}`;
+}
+
+export const map = {
   "data": [
     'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W',
     'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'W', ' ', ' ', ' ', ' ', ' ', ' ', 'W', ' ', ' ', 'W', ' ', ' ', 'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'W',

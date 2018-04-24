@@ -1,5 +1,5 @@
-import {createDesk, createWall} from './generator';
-import {modifyPosition, getPosition, map, WALL_WIDTH, WALL_DEPTH, WALL_HEIGHT, WALL_HEIGHT_SMALL} from './utils';
+import {createDesk, createWall, createDoor} from './generator';
+import {modifyPosition, getPosition, map, WALL_WIDTH, WALL_DEPTH, WALL_HEIGHT, WALL_HEIGHT_SMALL, DOOR_HEIGHT} from './utils';
 
 const playerPosition = "53.00621467111909 15 17.902337637901088";
 const playerRotation = "-26.012283898939394 51.5662015617741 0";
@@ -29,7 +29,7 @@ const createObject = (type, x, y) => {
     // wall
     case 'W': {
       createWall(scene, {
-        height: WALL_HEIGHT_SMALL,
+        height: WALL_HEIGHT,
         width: WALL_WIDTH,
         depth: WALL_DEPTH,
         color: '#fff',
@@ -56,7 +56,24 @@ const createObject = (type, x, y) => {
         position: getPosition(x, y, 0),
       })
       break;
-    }   
+    }
+    // door
+    case '|': {
+      createDoor(scene, {
+        position: getPosition(x, y, 0),
+        material: 'src: #wall-brick; repeat: 4 4',
+        rotation: '0',
+      })
+      break;
+    }
+    case '-': {
+      createDoor(scene, {
+        position: getPosition(x, y, 0),
+        material: 'src: #wall-brick; repeat: 4 4',
+        rotation: '90',
+      })
+      break;
+    }  
     case 'V': playerPosition = getPosition(x, y, 18);
     default: create = false;
   }  

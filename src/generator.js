@@ -1,4 +1,4 @@
-import {modifyPosition} from './utils';
+import {modifyPosition, WALL_HEIGHT, WALL_WIDTH, WALL_DEPTH} from './utils';
 
 const fornitureIds = {
   desk: 'id:961d4bae-6e62-4007-b50f-8c656fecce14',
@@ -69,6 +69,48 @@ export const createDesk = (scene, config) => {
     });
   }
 }
+
+export const createDoor = (scene, config) => {
+  let door = document.createElement('a-entity');
+  
+  let over = document.createElement('a-box');
+  over.setAttribute('height', 1);
+  over.setAttribute('width', WALL_WIDTH);
+  over.setAttribute('geometry', `depth:${WALL_DEPTH}`);
+  over.setAttribute('position', modifyPosition(config.position, 0, 0, 3.5));
+  over.setAttribute('color', '#FFF');
+  over.setAttribute('material', config.material);
+  over.setAttribute('static-body', 'sphereRadius:NaN');
+  door.appendChild(over);
+  let left = document.createElement('a-box');
+  left.setAttribute('height', WALL_HEIGHT-2);
+  left.setAttribute('width', 0.10);
+  left.setAttribute('geometry', `depth:${WALL_DEPTH}`);
+  left.setAttribute('position', config.rotation === '0' ? modifyPosition(config.position, -1, 0, 1.5) : modifyPosition(config.position, 0, -1, 1.5));
+  left.setAttribute('rotation', config.rotation === '0' ? '0 0 0' : '0 90 0');
+  left.setAttribute('color', '#000');
+  left.setAttribute('static-body', 'sphereRadius:NaN');
+  door.appendChild(left);
+  let right = document.createElement('a-box');
+  right.setAttribute('height', WALL_HEIGHT-2);
+  right.setAttribute('width', 0.10);
+  right.setAttribute('geometry', `depth:${WALL_DEPTH}`);
+  right.setAttribute('position', config.rotation === '0' ? modifyPosition(config.position, 1, 0, 1.5) : modifyPosition(config.position, 0, 1, 1.5));
+  right.setAttribute('rotation', config.rotation === '0' ? '0 0 0' : '0 90 0');
+  right.setAttribute('color', '#000');
+  right.setAttribute('static-body', 'sphereRadius:NaN');
+  door.appendChild(right);
+  let top = document.createElement('a-box');
+  top.setAttribute('height', 0.10);
+  top.setAttribute('width', WALL_WIDTH);
+  top.setAttribute('geometry', `depth:${WALL_DEPTH}`);
+  top.setAttribute('position', modifyPosition(config.position, 0, 0, 3));
+  top.setAttribute('color', '#000');
+  top.setAttribute('static-body', 'sphereRadius:NaN');
+  door.appendChild(top);
+
+  scene.appendChild(door);
+}  
 
 export const createWall = (scene, config) => {
   if (!walls) {

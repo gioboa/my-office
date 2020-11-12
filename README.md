@@ -1,4 +1,4 @@
 # my-office
-My office rendered with a-frame
+[My office](http://gioboa.github.io/my-office/) rendered with a-frame
 
-gioboa.github.io/my-office/
+
